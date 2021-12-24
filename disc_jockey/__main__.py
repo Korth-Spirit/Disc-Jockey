@@ -52,15 +52,12 @@ def find_speaker(bot: Instance, x: int, z: int, speak_description = "dj_speaker"
 
 with Instance(name="Portal Mage") as bot:
     try:
-        (
-            bot
-                .login(
-                    citizen_number=(int(input("Citizen Number: "))),
-                    password=input("Password: ")
-                )
-                .enter_world(input("World: "))
-                .move_to(Coordinates(0, 0, 0))
-        )
+        bot.login(
+                citizen_number=(int(input("Citizen Number: "))),
+                password=input("Password: ")
+            ).enter_world(
+                input("World: ")
+            ).move_to(Coordinates(0, 0, 0))
 
         speaker = find_speaker(bot, 0, 0)
         print(f"Found speaker at {speaker.x}, {speaker.z}")
@@ -88,7 +85,6 @@ with Instance(name="Portal Mage") as bot:
                     )
                 )
                 aw_wait(5 * 60 * 1000)
-
     except Exception as e:
         print(f"An error occurred: {e}")
         exit()
