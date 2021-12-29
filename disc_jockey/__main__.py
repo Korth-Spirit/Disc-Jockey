@@ -20,8 +20,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 from korth_spirit import Instance
 from korth_spirit.coords import Coordinates
-from korth_spirit.data.cell_object_data import CellObjectData
-from korth_spirit.data.object_change_data import ObjectChangeData
+from korth_spirit.data import CellObjectData, ObjectChangeData
 from korth_spirit.sdk import aw_object_change, aw_wait
 
 MIDIS = [
@@ -44,7 +43,7 @@ def find_speaker(bot: Instance, x: int, z: int, speak_description = "dj_speaker"
         CellObjectData: The speaker object.
     """
     print(f"Finding speaker at zone {x}, {z}")
-    for obj in bot.query(x, z):
+    for obj in bot.query(x=x, z=z):
         if speak_description in obj.description:
             return obj
 
