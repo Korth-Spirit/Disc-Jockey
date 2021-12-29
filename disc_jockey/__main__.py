@@ -18,10 +18,12 @@
 # LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+from time import sleep
+
 from korth_spirit import Instance
 from korth_spirit.coords import Coordinates
-from korth_spirit.data import CellObjectData, ObjectChangeData
-from korth_spirit.sdk import aw_object_change, aw_wait
+from korth_spirit.data import CellObjectData
+from korth_spirit.sdk import aw_wait
 
 MIDIS = [
     "class1.mid",
@@ -64,26 +66,12 @@ with Instance(name="Portal Mage") as bot:
         while True:
             for midi in MIDIS:
                 print(f"Playing {midi}")
-                aw_object_change(
-                    ObjectChangeData(
-                        old_number = speaker.number,
-                        old_x = speaker.x,
-                        old_z = speaker.z,
-                        owner = speaker.owner,
-                        build_timestamp = speaker.build_timestamp,
-                        x = speaker.x,
-                        y = speaker.y,
-                        z = speaker.z,
-                        yaw = speaker.yaw,
-                        tilt = speaker.tilt,
-                        roll = speaker.roll,
-                        model = speaker.model,
-                        description = speaker.description,
-                        action = f'create sound {midi}',
-                        data = speaker.data,
-                    )
+                speaker = speaker.set(
+                    name="action",
+                    value=f"create sound {midi}"
                 )
-                aw_wait(5 * 60 * 1000)
+                sleep(5 * 60 * 1000)
+                aw_wait(1)
     except Exception as e:
         print(f"An error occurred: {e}")
         exit()
