@@ -1,2 +1,6 @@
 __pycache__
 .venv
+
+# Active Worlds Software Development Kit
+aw.dll
+aw64.dll
