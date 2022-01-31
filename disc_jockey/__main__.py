@@ -18,61 +18,61 @@
 # LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-from time import sleep
+from typing import List
 
-from korth_spirit import Instance
-from korth_spirit.coords import Coordinates
+from korth_spirit import ConfigurableInstance
+from korth_spirit.configuration import (AggregateConfiguration,
+                                        InputConfiguration, JsonConfiguration)
 from korth_spirit.data import CellObjectData
 from korth_spirit.sdk import aw_wait
 
-MIDIS = [
-    "class1.mid",
-    "class2.mid",
-    "class3.mid",
-    "class4.mid"
-]
 
-def find_speaker(bot: Instance, x: int, z: int, speak_description = "dj_speaker") -> CellObjectData:
-    """
-    Find the speaker object.
+class DJInstance(ConfigurableInstance):
+    def __init__(self, midis: List[str]):
+        super().__init__(
+            AggregateConfiguration(
+                configurations={
+                    JsonConfiguration: ('configuration.json',),
+                    InputConfiguration: (),
+                }
+            )
+        )
+        self.midis = midis
+        self._current_midi = 0
+    
+    def find_speaker(self, description = "dj_speaker") -> CellObjectData:
+        """
+        Find the speaker object.
+        Raises:
+            Exception: If the speaker object could not be found.
 
-    Args:
-        bot (Instance): The bot instance.
-        x (int): The x coordinate.
-        z (int): The z coordinate.
+        Returns:
+            CellObjectData: The speaker object.
+        """
+        x, _, z = self._configuration.get_world_coordinates()
+        print(f"Looking for {description} at {x}, {z}")
+        for obj in self.query(x=x, z=z):
+            if description in obj.description:
+                print(f"Found speaker at {obj.x}, {obj.z}")
+                return obj
 
-    Returns:
-        CellObjectData: The speaker object.
-    """
-    print(f"Finding speaker at zone {x}, {z}")
-    for obj in bot.query(x=x, z=z):
-        if speak_description in obj.description:
-            return obj
+        raise Exception("Could not find speaker object.")
 
-    raise Exception("Could not find speaker object.")
-
-with Instance(name="Portal Mage") as bot:
-    try:
-        bot.login(
-                citizen_number=(int(input("Citizen Number: "))),
-                password=input("Password: ")
-            ).enter_world(
-                input("World: ")
-            ).move_to(Coordinates(0, 0, 0))
-
-        speaker = find_speaker(bot, 0, 0)
-        print(f"Found speaker at {speaker.x}, {speaker.z}")
-
+    def main_loop(self, timer: int = 100) -> None:
         while True:
-            for midi in MIDIS:
-                print(f"Playing {midi}")
-                speaker = speaker.set(
-                    name="action",
-                    value=f"create sound {midi}"
-                )
-                sleep(5 * 60 * 1000)
-                aw_wait(1)
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        exit()
+            self.find_speaker().set(
+                name="action",
+                value=f"create sound {self.midis[self._current_midi]}"
+            )
+            print(f"Playing {self.midis[self._current_midi]}")
 
+            self._current_midi = (self._current_midi + 1) % len(self.midis)
+            aw_wait(timer)
+
+with DJInstance([
+    "class1.midi",
+    "class2.midi",
+    "class3.midi",
+    "class4.midi"
+]) as bot:
+    bot.main_loop(5 * 60* 1000)
