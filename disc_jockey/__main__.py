@@ -75,4 +75,4 @@ with DJInstance([
     "class3.midi",
     "class4.midi"
 ]) as bot:
-    bot.main_loop(5 * 60* 1000)
+    bot.main_loop(5 * 60 * 1000)
