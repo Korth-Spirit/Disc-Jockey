@@ -20,7 +20,6 @@ docker build -t dj .
 docker run -it dj
 ```
 
-
 # Configuration
 
 Configuration is an aggregation of multiple configuration sources. The configuration sources in order of precedence are:
