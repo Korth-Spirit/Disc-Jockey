@@ -4,7 +4,7 @@ This is an example program that users the Spirit of Korth's Software Development
 
 This project and/or its contributors are not affiliated with Active Worlds.
 
-## Usage
+# Usage
 
 This program can both be used locally and through the use of the provided Docker image.
 
@@ -21,7 +21,7 @@ docker run -it dj
 ```
 
 
-## Configuration
+# Configuration
 
 Configuration is an aggregation of multiple configuration sources. The configuration sources in order of precedence are:
 
@@ -43,7 +43,7 @@ Z coordinates are north/south where north is positive and south is negative.
 | `WORLD_Y` | The y coordinate of the world to connect to. |
 | `WORLD_Z` | The z coordinate of the world to connect to. |
 
-### Json Configuration File
+## Json Configuration File
 
 The json configuration file is a json file that contains the configuration for the bot. The json file must be called `configuration.json`. IF the json file is not found, no errors occur and the configuration is not used.
 
@@ -63,14 +63,14 @@ Configuration example:
 }
 ```
 
-### User Input
+## User Input
 
 The user input is a series of prompts that are displayed to the user. The user input is used to gather the configuration for the bot when no other configuration is available.
 
-## License
+# License
 
 This project is licensed under the MIT license.
 
-## Contribution
+# Contribution
 
 This project is open source. Feel free to contribute to the project by opening an issue, creating a pull request, or by contacting [Johnny Irvin](mailto:irvinjohnathan@gmail.com). I appreciate any feedback or contributions. This project is not affiliated with Active Worlds, Inc. The creator of this project is not affiliated with Active Worlds, Inc.
