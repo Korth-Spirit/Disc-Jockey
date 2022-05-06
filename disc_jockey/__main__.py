@@ -21,8 +21,7 @@
 from typing import List
 
 from korth_spirit import ConfigurableInstance
-from korth_spirit.configuration import (AggregateConfiguration,
-                                        InputConfiguration, JsonConfiguration)
+from korth_spirit.configuration import JsonConfiguration
 from korth_spirit.data import CellObjectData
 from korth_spirit.sdk import aw_wait
 
@@ -30,12 +29,7 @@ from korth_spirit.sdk import aw_wait
 class DJInstance(ConfigurableInstance):
     def __init__(self, midis: List[str]):
         super().__init__(
-            AggregateConfiguration(
-                configurations={
-                    JsonConfiguration: ('configuration.json',),
-                    InputConfiguration: (),
-                }
-            )
+            JsonConfiguration('configuration.json')
         )
         self.midis = midis
         self._current_midi = 0
