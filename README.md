@@ -22,14 +22,7 @@ docker run -it dj
 
 # Configuration
 
-Configuration is an aggregation of multiple configuration sources. The configuration sources in order of precedence are:
-
-- The json configuration file
-- The user's input
-
-X coordinates are west/east where west is positive and east is negative.
-Y coordinates represent height where up is positive and down is negative and ground is 0.
-Z coordinates are north/south where north is positive and south is negative.
+This bot uses a json configuration file named "configuration.json" located in the same directory as the application.
 
 | Variable | Description |
 |---------|-------------|
@@ -42,9 +35,9 @@ Z coordinates are north/south where north is positive and south is negative.
 | `WORLD_Y` | The y coordinate of the world to connect to. |
 | `WORLD_Z` | The z coordinate of the world to connect to. |
 
-## Json Configuration File
-
-The json configuration file is a json file that contains the configuration for the bot. The json file must be called `configuration.json`. IF the json file is not found, no errors occur and the configuration is not used.
+X coordinates are west/east where west is positive and east is negative.
+Y coordinates represent height where up is positive and down is negative and ground is 0.
+Z coordinates are north/south where north is positive and south is negative.
 
 Configuration example:
 ```json
@@ -61,10 +54,6 @@ Configuration example:
     "password": "password"
 }
 ```
-
-## User Input
-
-The user input is a series of prompts that are displayed to the user. The user input is used to gather the configuration for the bot when no other configuration is available.
 
 # License
 
