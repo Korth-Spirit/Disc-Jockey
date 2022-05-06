@@ -29,7 +29,6 @@ This bot uses a json configuration file named "configuration.json" located in th
 | `BOT_NAME` | The name of the bot. |
 | `CITIZEN_NUMBER` | The owner of the bot. |
 | `PASSWORD` | The password of the bot. |
-| `PLUGIN_PATH` | The directory to load plugins from. |
 | `WORLD_NAME` | The name of the world to connect to. |
 | `WORLD_X` | The x coordinate of the world to connect to. |
 | `WORLD_Y` | The y coordinate of the world to connect to. |
@@ -49,7 +48,6 @@ Configuration example:
         "y": 0,
         "z": 0
     },
-    "plugin_path": "plugins",
     "citizen_number": 123456,
     "password": "password"
 }
