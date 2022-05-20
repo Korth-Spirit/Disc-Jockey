@@ -1,6 +1,6 @@
 # Disc Jockey
 
-This is an example program that users the Spirit of Korth's Software Development Wrapper for Active Worlds to interact with the [Active Worlds](https://www.activeworlds.com). This program was inspired by the [Disc Jockey](http://wiki.activeworlds.com/index.php?title=SDK_Sample_Program_2) written in C using the original Active Worlds SDK.
+This is an example program that uses the Spirit of Korth's Software Development Wrapper for Active Worlds to interact with the [Active Worlds](https://www.activeworlds.com). This program was inspired by the [Disc Jockey](http://wiki.activeworlds.com/index.php?title=SDK_Sample_Program_2) written in C using the original Active Worlds SDK.
 
 This project and/or its contributors are not affiliated with Active Worlds.
 
